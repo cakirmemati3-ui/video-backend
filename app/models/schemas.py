@@ -38,6 +38,11 @@ class VideoFormat(BaseModel):
     vcodec: Optional[str] = None
     acodec: Optional[str] = None
 
+    @validator('quality', pre=True)
+    def convert_quality(cls, v):
+        if v is not None:
+            return str(v)
+        return v
 
 class VideoInfoResponse(BaseModel):
     """Response model for video info"""
