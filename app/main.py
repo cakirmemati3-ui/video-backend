@@ -104,7 +104,7 @@ async def video_downloader_exception_handler(request: Request, exc: VideoDownloa
             error=exc.detail,
             detail=str(exc.detail),
             timestamp=datetime.utcnow()
-        ).model_dump()
+        ).model_dump(mode='json')
     )
 
 
@@ -120,7 +120,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
             error="Geçersiz istek formatı",
             detail=str(exc.errors()),
             timestamp=datetime.utcnow()
-        ).model_dump()
+        ).model_dump(mode='json')
     )
 
 
@@ -136,7 +136,7 @@ async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
             error="Çok fazla istek!",
             detail="Yavaş abi! Dakikada en fazla 30 istek atabilirsin. Biraz bekle.",
             timestamp=datetime.utcnow()
-        ).model_dump()
+        ).model_dump(mode='json')
     )
 
 
@@ -152,7 +152,7 @@ async def global_exception_handler(request: Request, exc: Exception):
             error="Sunucu hatası",
             detail="Beklenmeyen bir hata oluştu. Geliştiriciler bilgilendirildi.",
             timestamp=datetime.utcnow()
-        ).model_dump()
+        ).model_dump(mode='json')
     )
 
 
